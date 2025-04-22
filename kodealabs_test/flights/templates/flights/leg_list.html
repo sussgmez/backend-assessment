@@ -1,0 +1,88 @@
+<style>
+    * {
+        box-sizing: border-box;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    body {
+        margin: 0;
+    }
+    .page {
+        background-color: rgba(0, 0, 0, 0.05);
+        padding: 1rem;
+    }
+    form {
+        background-color: rgba(0, 0, 0, 0.05);
+        padding: 0.5rem;
+        border-radius: 4px;
+    }
+    label {
+        font-size: 0.8125rem;
+    }
+    input {
+        border: 1px solid rgba(0, 0, 0, 0.5);
+        border-radius: 2px;
+        padding: 0.25rem;
+        width: 150px;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    button {
+        width: fit-content;
+        padding: 0.25rem 1rem;
+        background-color: black;
+        color: white;
+        font-weight: 500;
+        font-size: 0.75rem;
+        border-radius: 2px;
+        cursor: pointer;
+    }
+    .leg {
+        background-color: rgba(0, 0, 0, 0.05);
+        padding: 1rem;
+        margin-bottom: 1rem;
+        p {
+            font-size: 0.75rem;
+        }
+    }
+    h4 {
+        margin: 0;
+    }
+    a {
+        display: block;
+        margin-bottom: 0.25rem;
+        font-size: 0.75rem;
+    }
+</style>
+
+<div class="page">
+    <a href="{% url 'home' %}">Inicio</a>
+    <a href="{% url 'itinerarie-list' %}">Itinerarios</a>
+    <a href="{% url 'leg-list' %}">Tramos</a>
+    <h3>Tramos</h3>
+    <form action="" method="get">
+        <div class="input-field">
+            <label for="id_airline_name">Aerolína</label>
+            <input type="text" name="airline_name" id="id_airline_name" value="{{ airline_name }}">
+        </div>
+        <button>Buscar</button>
+    </form>
+    
+    {% for leg in leg_list %}
+        <div class="leg">
+            <h4>Tramo {{ leg.id }}</h4>
+            <p><b>Aeropuerto de salida: </b>{{ leg.departure_airport }}</p>
+            <p><b>Aeropuerto de entrada: </b>{{ leg.arrival_airport }}</p>
+            <p><b>Hora de salida: </b>{{ leg.departure_time|date:"d/m/Y h:i a" }}</p>
+            <p><b>Hora de llegada: </b>{{ leg.arrival_time|date:"d/m/Y h:i a" }}</p>
+            <p><b>Paradas: </b>{{ leg.stops }}</p>
+            <p><b>Nombre de aerolínea: </b>{{ leg.airline_name }}</p>
+            <p><b>ID aerolínea: </b>{{ leg.airline_id }}</p>
+            <p><b>Duración: </b>{{ leg.duration_mins }} minutos</p>
+        </div>
+    {% empty %}
+    <p>No se encontraron resultados</p>
+    {% endfor %}
+</div>

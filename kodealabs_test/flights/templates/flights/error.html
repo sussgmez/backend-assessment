@@ -1,0 +1,26 @@
+<style>
+    * {
+        box-sizing: border-box;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    body {
+        margin: 0;
+        padding: 1rem;
+    }
+    p {
+        background-color: rgba(0, 0, 0, 0.05);
+        padding: 1rem;
+        border-radius: 4px;
+        font-size: 0.8125rem;
+    }
+    a {
+        display: block;
+        margin-bottom: 0.25rem;
+        font-size: 0.75rem;
+    }
+</style>
+
+<p>Error al cargar elementos.</p>
+<a href="../../admin">Volver a la página de administrador</a>
+<a href="{% url 'itinerarie-list' %}">Itinerarios</a>
+<a href="{% url 'leg-list' %}">Tramos</a>
